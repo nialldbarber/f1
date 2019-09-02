@@ -1,4 +1,4 @@
-# 🏎️ F1 Database 🏎️
+# 🏎️️️️🏎️️️️🏎️️️️  F1 Database  🏎️🏎️️️️🏎️️️️
 
 Playing about with GraphQL to create a Formula One database - which is presented on the front end with React
 
