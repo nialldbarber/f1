@@ -1,7 +1,7 @@
-import { Driver } from '../models/drivers'
-import { Races } from '../models/races'
+const Driver = require('../models/drivers')
+const Races = require('../models/races')
 
-export const resolvers = {
+const resolvers = {
   Query: {
     drivers: () => Driver.find(),
     races: () => Races.find(),
@@ -19,3 +19,5 @@ export const resolvers = {
     },
   },
 }
+
+module.exports = resolvers

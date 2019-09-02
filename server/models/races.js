@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const { Schema, model } = mongoose
 
@@ -12,4 +12,6 @@ const racesSchema = new Schema({
   polePosition: String,
 })
 
-export const Races = model('races', racesSchema)
+const Races = model('races', racesSchema)
+
+module.exports = Races

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const { Schema, model } = mongoose
 
@@ -7,7 +7,8 @@ const driverSchema = new Schema({
   age: Number,
   country: String,
   team: String,
-  racesWon: Array,
 })
 
-export const Driver = model('driver', driverSchema)
+const Driver = model('driver', driverSchema)
+
+module.exports = Driver

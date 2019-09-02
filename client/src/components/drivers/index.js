@@ -21,8 +21,8 @@ const Drivers = () => {
   return (
     <div className="drivers">
       <h3>Drivers</h3>
-      {data.drivers.map(({ name, age, country, team }) => (
-        <Driver name={name} age={age} country={country} team={team} />
+      {data.drivers.map(({ name, age, country, team }, i) => (
+        <Driver key={i} name={name} age={age} country={country} team={team} />
       ))}
     </div>
   )

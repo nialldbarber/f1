@@ -1,12 +1,9 @@
-import path from 'path'
-import fs from 'fs'
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import { ApolloServer } from 'apollo-server-express'
-import { resolvers } from './schema/resolvers'
-
-const typeDefs = fs.readFileSync('./schema/schema.graphql', 'utf8').toString()
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const { ApolloServer } = require('apollo-server-express')
+const typeDefs = require('./schema/schema')
+const resolvers = require('./schema/resolvers')
 
 require('./db')
 

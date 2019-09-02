@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import styled from 'styled-components'
 
-const AddForm = styled.div`
+const AddForm = styled.form`
   display: flex;
   flex-direction: column;
 `
 
 const SET_DRIVERS = gql`
-  mutation {
-    addDriver(name: String, age: Int, country: String, team: String) {
+  mutation AddDriver(
+    $name: String!
+    $age: Int!
+    $country: String!
+    $team: String!
+  ) {
+    addDriver(name: $name, age: $age, country: $country, team: $team) {
       name
       age
       country
@@ -20,7 +24,7 @@ const SET_DRIVERS = gql`
   }
 `
 
-const AddDriver = ({ name, age, country, team }) => {
+const AddDriver = () => {
   const [driver, setDriver] = useState({
     name: '',
     age: '',
@@ -28,8 +32,10 @@ const AddDriver = ({ name, age, country, team }) => {
     team: '',
   })
 
+  const { name, age, country, team } = driver
+
   const [addDriver, { error }] = useMutation(SET_DRIVERS, {
-    variables: { name, age, country, team },
+    variables: { name, age: parseInt(age), country, team },
     refetchQueries: ['drivers'],
   })
 
@@ -39,25 +45,32 @@ const AddDriver = ({ name, age, country, team }) => {
     setDriver({ ...driver, [e.target.name]: e.target.value })
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+    addDriver()
+  }
+
   return (
     <div>
       <p>Add Driver Here:</p>
-      <AddForm>
+      <AddForm action="" onSubmit={handleSubmit}>
         <label htmlFor="name">
           Name:
           <input
             type="text"
             name="name"
-            value={driver.name}
+            id="name"
+            value={name}
             onChange={handleChange}
           />
         </label>
         <label htmlFor="age">
           Age:
           <input
-            type="text"
+            type="number"
             name="age"
-            value={driver.age}
+            id="age"
+            value={age}
             onChange={handleChange}
           />
         </label>
@@ -66,7 +79,8 @@ const AddDriver = ({ name, age, country, team }) => {
           <input
             type="text"
             name="country"
-            value={driver.country}
+            id="country"
+            value={country}
             onChange={handleChange}
           />
         </label>
@@ -75,23 +89,15 @@ const AddDriver = ({ name, age, country, team }) => {
           <input
             type="text"
             name="team"
-            value={driver.team}
+            id="team"
+            value={team}
             onChange={handleChange}
           />
         </label>
-        <button onClick={addDriver} type="button">
-          Click me
-        </button>
+        <button type="submit">Submit</button>
       </AddForm>
     </div>
   )
 }
 
 export default AddDriver
-
-AddDriver.propTypes = {
-  name: PropTypes.string,
-  age: PropTypes.number,
-  country: PropTypes.string,
-  team: PropTypes.string,
-}
