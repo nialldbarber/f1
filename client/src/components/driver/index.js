@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { DriverRow } from './styles'
 
 const Driver = ({ name, age, country, team }) => (
-  <div>
-    <p>Name: {name}</p>
-    <p>Age: {age}</p>
-    <p>Country: {country}</p>
-    <p>Team: {team}</p>
-  </div>
+  <DriverRow>
+    <p>{name}</p>
+    <p>{age}</p>
+    <p>{country}</p>
+    <p>{team}</p>
+  </DriverRow>
 )
 
 export default Driver

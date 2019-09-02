@@ -1,12 +1,7 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
-import styled from 'styled-components'
-
-const AddForm = styled.form`
-  display: flex;
-  flex-direction: column;
-`
+import { AddForm } from './styles'
 
 const SET_DRIVERS = gql`
   mutation AddDriver(
