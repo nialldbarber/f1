@@ -7,6 +7,7 @@ import { DriverHeader } from './styles'
 const GET_DRIVERS = gql`
   query drivers {
     drivers {
+      _id
       name
       age
       country
@@ -30,8 +31,15 @@ const Drivers = () => {
         <p>Country</p>
         <p>Team</p>
       </DriverHeader>
-      {data.drivers.map(({ name, age, country, team }, i) => (
-        <Driver key={i} name={name} age={age} country={country} team={team} />
+      {data.drivers.map(({ _id, name, age, country, team }) => (
+        <Driver
+          key={_id}
+          id={_id}
+          name={name}
+          age={age}
+          country={country}
+          team={team}
+        />
       ))}
     </div>
   )

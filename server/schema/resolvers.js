@@ -14,8 +14,8 @@ const resolvers = {
     races: () => Races.find(),
   },
   Mutation: {
-    addDriver: async (_, { name, age, country, team }) => {
-      const driver = new Driver({ name, age, country, team })
+    addDriver: async (_, { _id, name, age, country, team }) => {
+      const driver = new Driver({ _id, name, age, country, team })
       await driver.save()
       return driver
     },

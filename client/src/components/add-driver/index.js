@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { AddForm } from './styles'
 
-const SET_DRIVERS = gql`
+const ADD_DRIVERS = gql`
   mutation AddDriver(
     $name: String!
     $age: Int!
@@ -29,7 +29,7 @@ const AddDriver = () => {
 
   const { name, age, country, team } = driver
 
-  const [addDriver, { error }] = useMutation(SET_DRIVERS, {
+  const [addDriver, { error }] = useMutation(ADD_DRIVERS, {
     variables: { name, age: parseInt(age), country, team },
     refetchQueries: ['drivers'],
   })
@@ -43,12 +43,18 @@ const AddDriver = () => {
   const handleSubmit = e => {
     e.preventDefault()
     addDriver()
+    setDriver({
+      name: '',
+      age: '',
+      country: '',
+      team: '',
+    })
   }
 
   return (
     <div>
       <p>Add Driver Here:</p>
-      <AddForm action="" onSubmit={handleSubmit}>
+      <AddForm onSubmit={handleSubmit}>
         <label htmlFor="name">
           Name:
           <input
