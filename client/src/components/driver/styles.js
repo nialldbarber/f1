@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 
 export const DriverRow = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 250px;
 
-  p {
-    width: calc(100% / 4);
+  div {
+    text-align: left;
   }
 `

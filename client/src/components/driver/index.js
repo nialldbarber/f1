@@ -22,17 +22,15 @@ const Driver = ({ id, name, age, country, team }) => {
   if (error) console.log(`Error: ${error}`)
 
   return (
-    <div>
-      <DriverRow>
-        <p>{name}</p>
-        <p>{age}</p>
-        <p>{country}</p>
-        <p>{team}</p>
-      </DriverRow>
+    <DriverRow>
+      <div>{name}</div>
+      <div>{age}</div>
+      <div>{country}</div>
+      <div>{team}</div>
       <button type="submit" onClick={() => removeDriver(id)}>
         ✅
       </button>
-    </div>
+    </DriverRow>
   )
 }
 

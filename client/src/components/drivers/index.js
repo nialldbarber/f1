@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import Driver from '../driver'
-import { DriverHeader } from './styles'
+import { DriverTable, DriverHeader } from './styles'
 
 const GET_DRIVERS = gql`
   query drivers {
@@ -23,13 +23,13 @@ const Drivers = () => {
   if (error) return <p>Error ☹️</p>
 
   return (
-    <div className="drivers">
-      <h3>Drivers</h3>
+    <DriverTable className="drivers">
       <DriverHeader>
-        <p>Name</p>
-        <p>Age</p>
-        <p>Country</p>
-        <p>Team</p>
+        <div>Name</div>
+        <div>Age</div>
+        <div>Country</div>
+        <div>Team</div>
+        <div>Remove?</div>
       </DriverHeader>
       {data.drivers.map(({ _id, name, age, country, team }) => (
         <Driver
@@ -41,7 +41,7 @@ const Drivers = () => {
           team={team}
         />
       ))}
-    </div>
+    </DriverTable>
   )
 }
 

@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
-import { AddForm } from './styles'
+// Components
+import Button from '../button'
+// Styles
+import { FormContainer, AddForm } from './styles'
 
 const ADD_DRIVERS = gql`
   mutation AddDriver(
@@ -26,6 +29,7 @@ const AddDriver = () => {
     country: '',
     team: '',
   })
+  const [visibility, setVisibility] = useState(false)
 
   const { name, age, country, team } = driver
 
@@ -52,52 +56,54 @@ const AddDriver = () => {
   }
 
   return (
-    <div>
-      <p>Add Driver Here:</p>
-      <AddForm onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          Name:
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="age">
-          Age:
-          <input
-            type="number"
-            name="age"
-            id="age"
-            value={age}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="country">
-          Country:
-          <input
-            type="text"
-            name="country"
-            id="country"
-            value={country}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="team">
-          Team:
-          <input
-            type="text"
-            name="team"
-            id="team"
-            value={team}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </AddForm>
-    </div>
+    <Fragment>
+      <Button text="Add Driver" click={() => setVisibility(!visibility)} />
+      <FormContainer className={visibility === true ? 'active' : ''}>
+        <AddForm onSubmit={handleSubmit}>
+          <label htmlFor="name">
+            Name:
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="age">
+            Age:
+            <input
+              type="number"
+              name="age"
+              id="age"
+              value={age}
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="country">
+            Country:
+            <input
+              type="text"
+              name="country"
+              id="country"
+              value={country}
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="team">
+            Team:
+            <input
+              type="text"
+              name="team"
+              id="team"
+              value={team}
+              onChange={handleChange}
+            />
+          </label>
+          <button type="submit">Submit</button>
+        </AddForm>
+      </FormContainer>
+    </Fragment>
   )
 }
 
