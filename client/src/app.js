@@ -1,20 +1,24 @@
 import React from 'react'
-import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
+import { ThemeProvider } from 'styled-components'
+// Components
 import Drivers from './components/drivers'
 import AddDriver from './components/add-driver'
-
-const client = new ApolloClient({
-  uri: `http://localhost:4000/graphql`,
-})
+// Utils
+import { client } from './utils/apollo-client'
+// Styles
+import { theme } from './styles/styled-components/utils/theme'
+import { Heading } from './components/header/styles'
 
 const App = () => (
   <ApolloProvider client={client}>
-    <div className="App App-header">
-      <h1>F1 Stats</h1>
-      <AddDriver />
-      <Drivers />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="app">
+        <Heading>F1 Stats</Heading>
+        <AddDriver />
+        <Drivers />
+      </div>
+    </ThemeProvider>
   </ApolloProvider>
 )
 
