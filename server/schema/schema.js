@@ -2,14 +2,16 @@ const { gql } = require('apollo-server')
 
 const typeDefs = gql`
   type Driver {
-    name: String!
-    age: Int!
-    country: String!
-    team: String!
+    _id: ID
+    name: String
+    age: Int
+    country: String
+    team: String
     #racesWon: [Race]
   }
 
   type Race {
+    _id: ID!
     track: String!
     country: String!
     city: String!
@@ -26,6 +28,7 @@ const typeDefs = gql`
 
   type Mutation {
     addDriver(name: String!, age: Int!, country: String!, team: String!): Driver
+    removeDriver(_id: ID!): Driver
     addRace(
       track: String
       country: String
