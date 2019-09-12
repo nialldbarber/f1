@@ -1,7 +1,9 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
+import axios from 'axios'
 import DatePicker from 'react-datepicker'
+import Select from 'react-select'
 import 'react-datepicker/dist/react-datepicker.css'
 import moment from 'moment'
 // Components
@@ -43,14 +45,27 @@ const AddDriver = () => {
   })
   const [born, setBorn] = useState('')
   const [visibility, setVisibility] = useState(false)
+  // Fetch countries
+  const [data, setData] = useState([])
+  const [selectedOption, setSelectedOption] = useState('')
 
-  const { name, country, team, championships } = driver
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        'https://gist.githubusercontent.com/nialldbarber/df3fa4619ef34c4c8ea382fd464f2309/raw/14e26cf7e1a59b938317fb4aa376432ebe121870/countries.json'
+      )
+      setData(result.data)
+    }
+    fetchData()
+  }, [])
+
+  const { name, team, championships } = driver
 
   const [addDriver, { error }] = useMutation(ADD_DRIVERS, {
     variables: {
       name,
       age: born,
-      country,
+      country: selectedOption.label,
       team,
       championships: parseInt(championships),
     },
@@ -61,6 +76,10 @@ const AddDriver = () => {
 
   const handleChange = e => {
     setDriver({ ...driver, [e.target.name]: e.target.value })
+  }
+
+  const handleCountryChange = place => {
+    setSelectedOption(place)
   }
 
   const handleSubmit = e => {
@@ -106,21 +125,12 @@ const AddDriver = () => {
           </label>
           <label htmlFor="country">
             Country:
-            {/* <input
-              type="text"
-              name="country"
-              id="country"
-              value={country}
-              onChange={handleChange}
-            /> */}
-            <select value={country} name="country" onChange={handleChange}>
-              <option value="grapefruit">Grapefruit</option>
-              <option value="lime">Lime</option>
-              <option selected value="coconut">
-                Coconut
-              </option>
-              <option value="mango">Mango</option>
-            </select>
+            <Select
+              className="select"
+              value={selectedOption}
+              onChange={handleCountryChange}
+              options={data}
+            />
           </label>
           <label htmlFor="team">
             Team:

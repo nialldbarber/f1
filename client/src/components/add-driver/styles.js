@@ -7,7 +7,6 @@ export const FormContainer = styled.div`
   transform: translate(-50%, -50%);
   width: 600px;
   height: 470px;
-  overflow: hidden;
   opacity: 0;
   border-radius: 2px;
   background: ${props => props.theme.white};
@@ -40,6 +39,10 @@ export const FormContainer = styled.div`
       margin: 1rem 0;
 
       input {
+        width: 351px;
+      }
+
+      .select {
         width: 351px;
       }
     }
