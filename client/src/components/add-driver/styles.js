@@ -1,17 +1,22 @@
 import styled from 'styled-components'
 
 export const FormContainer = styled.div`
-  position: relative;
-  margin: 0 auto;
-  height: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 600px;
+  height: 360px;
   overflow: hidden;
+  opacity: 0;
   background: ${props => props.theme.white};
-  transition: height ${props => props.theme.time} ${props => props.theme.effect};
+  transition: opacity 0.2s ease;
   box-shadow: ${props => props.theme.bs};
+  z-index: -4;
 
   &.active {
-    height: 400px;
+    opacity: 1;
+    z-index: 9;
   }
 
   form {

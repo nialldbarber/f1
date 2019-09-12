@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 // Components
 import Button from '../button'
 // Styles
@@ -23,6 +25,7 @@ const ADD_DRIVERS = gql`
 `
 
 const AddDriver = () => {
+  const [startDate, setStartDate] = useState(new Date())
   const [driver, setDriver] = useState({
     name: '',
     age: '',
@@ -54,6 +57,10 @@ const AddDriver = () => {
       team: '',
     })
   }
+  const handleDateChange = date => {
+    setStartDate(date)
+    console.log(date)
+  }
 
   return (
     <Fragment>
@@ -72,13 +79,14 @@ const AddDriver = () => {
           </label>
           <label htmlFor="age">
             Age:
-            <input
+            {/* <input
               type="number"
               name="age"
               id="age"
               value={age}
               onChange={handleChange}
-            />
+            /> */}
+            <DatePicker selected={startDate} onChange={handleDateChange} />
           </label>
           <label htmlFor="country">
             Country:

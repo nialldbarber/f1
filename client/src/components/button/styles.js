@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const Btn = styled.button`
   display: block;
   margin: 1rem 0 1rem auto;
-  border: none;
   font-size: 1rem;
   background: ${props => props.theme.brightGreen};
   color: ${props => props.theme.white};
@@ -15,8 +14,6 @@ export const Btn = styled.button`
   font-weight: 600;
   text-transform: uppercase;
   transition: all 0.15s ease;
-  outline: none;
-  cursor: pointer;
 
   &:hover {
     transform: translateY(-1px);
