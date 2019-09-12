@@ -13,12 +13,15 @@ export const DriverTable = styled.div`
 `
 
 export const DriverHeader = styled.div`
+  position: relative;
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 220px 90px 1fr 1fr 200px 110px;
+  height: 100%;
 
-  p {
-    font-weight: bold;
-    width: calc(100% / 4);
+  * {
+    display: flex;
+    align-items: center;
+    text-align: left;
   }
 `

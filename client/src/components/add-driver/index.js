@@ -87,8 +87,6 @@ const AddDriver = () => {
     addDriver()
     setDriver({
       name: '',
-      age: '',
-      country: '',
       team: '',
       championships: '',
     })
@@ -100,7 +98,6 @@ const AddDriver = () => {
     const now = moment()
     const ageee = now.diff(birthDate, 'years')
     setBorn(ageee)
-    console.log(born)
   }
 
   return (
@@ -152,7 +149,19 @@ const AddDriver = () => {
               onChange={handleChange}
             />
           </label>
-          <Button text="Add" onClick={() => setVisibility(false)} />
+          <div className="action-buttons">
+            <Button
+              text="Exit"
+              state="rag-error"
+              click={() => setVisibility(false)}
+              type="button"
+            />
+            <Button
+              text="Add"
+              state="rag-success"
+              onClick={() => setVisibility(false)}
+            />
+          </div>
         </AddForm>
       </FormContainer>
     </Fragment>

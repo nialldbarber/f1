@@ -15,6 +15,10 @@ export const Btn = styled.button`
   text-transform: uppercase;
   transition: all 0.15s ease;
 
+  &.rag-error {
+    background: ${props => props.theme.ragError};
+  }
+
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
