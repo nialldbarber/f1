@@ -5,7 +5,7 @@ import { Btn } from './styles'
 
 const Button = ({ text, click }) => (
   <Fragment>
-    <Btn type="button" onClick={click}>
+    <Btn type="submit" onClick={click}>
       {text}
     </Btn>
   </Fragment>

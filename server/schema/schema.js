@@ -7,6 +7,7 @@ const typeDefs = gql`
     age: Int
     country: String
     team: String
+    championships: Int
     #racesWon: [Race]
   }
 
@@ -27,7 +28,13 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addDriver(name: String!, age: Int!, country: String!, team: String!): Driver
+    addDriver(
+      name: String!
+      age: Int!
+      country: String!
+      team: String!
+      championships: Int!
+    ): Driver
     removeDriver(_id: ID!): Driver
     addRace(
       track: String
@@ -42,3 +49,7 @@ const typeDefs = gql`
 `
 
 module.exports = typeDefs
+
+// TODO:
+// Add championships to schema
+// Add races won

@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import moment from 'moment'
 // Components
 import Button from '../button'
 // Styles
@@ -14,12 +15,20 @@ const ADD_DRIVERS = gql`
     $age: Int!
     $country: String!
     $team: String!
+    $championships: Int!
   ) {
-    addDriver(name: $name, age: $age, country: $country, team: $team) {
+    addDriver(
+      name: $name
+      age: $age
+      country: $country
+      team: $team
+      championships: $championships
+    ) {
       name
       age
       country
       team
+      championships
     }
   }
 `
@@ -28,16 +37,23 @@ const AddDriver = () => {
   const [startDate, setStartDate] = useState(new Date())
   const [driver, setDriver] = useState({
     name: '',
-    age: '',
     country: '',
     team: '',
+    championships: '',
   })
+  const [born, setBorn] = useState('')
   const [visibility, setVisibility] = useState(false)
 
-  const { name, age, country, team } = driver
+  const { name, country, team, championships } = driver
 
   const [addDriver, { error }] = useMutation(ADD_DRIVERS, {
-    variables: { name, age: parseInt(age), country, team },
+    variables: {
+      name,
+      age: born,
+      country,
+      team,
+      championships: parseInt(championships),
+    },
     refetchQueries: ['drivers'],
   })
 
@@ -55,17 +71,24 @@ const AddDriver = () => {
       age: '',
       country: '',
       team: '',
+      championships: '',
     })
   }
+
   const handleDateChange = date => {
     setStartDate(date)
-    console.log(date)
+    const birthDate = moment(date)
+    const now = moment()
+    const ageee = now.diff(birthDate, 'years')
+    setBorn(ageee)
+    console.log(born)
   }
 
   return (
     <Fragment>
       <Button text="Add Driver" click={() => setVisibility(!visibility)} />
       <FormContainer className={visibility === true ? 'active' : ''}>
+        <h2>Add Driver</h2>
         <AddForm onSubmit={handleSubmit}>
           <label htmlFor="name">
             Name:
@@ -79,24 +102,25 @@ const AddDriver = () => {
           </label>
           <label htmlFor="age">
             Age:
-            {/* <input
-              type="number"
-              name="age"
-              id="age"
-              value={age}
-              onChange={handleChange}
-            /> */}
             <DatePicker selected={startDate} onChange={handleDateChange} />
           </label>
           <label htmlFor="country">
             Country:
-            <input
+            {/* <input
               type="text"
               name="country"
               id="country"
               value={country}
               onChange={handleChange}
-            />
+            /> */}
+            <select value={country} name="country" onChange={handleChange}>
+              <option value="grapefruit">Grapefruit</option>
+              <option value="lime">Lime</option>
+              <option selected value="coconut">
+                Coconut
+              </option>
+              <option value="mango">Mango</option>
+            </select>
           </label>
           <label htmlFor="team">
             Team:
@@ -108,7 +132,17 @@ const AddDriver = () => {
               onChange={handleChange}
             />
           </label>
-          <button type="submit">Submit</button>
+          <label htmlFor="championships">
+            Championships:
+            <input
+              type="text"
+              name="championships"
+              id="championships"
+              value={championships}
+              onChange={handleChange}
+            />
+          </label>
+          <Button text="Add" onClick={() => setVisibility(false)} />
         </AddForm>
       </FormContainer>
     </Fragment>

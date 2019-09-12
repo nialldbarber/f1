@@ -15,7 +15,7 @@ export const DriverTable = styled.div`
 export const DriverHeader = styled.div`
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 1fr 90px 1fr 1fr 110px;
+  grid-template-columns: 220px 90px 1fr 1fr 200px 110px;
 
   p {
     font-weight: bold;

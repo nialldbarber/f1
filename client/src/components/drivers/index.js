@@ -12,6 +12,7 @@ const GET_DRIVERS = gql`
       age
       country
       team
+      championships
     }
   }
 `
@@ -29,9 +30,10 @@ const Drivers = () => {
         <div>Age</div>
         <div>Country</div>
         <div>Team</div>
+        <div>Championship(s)</div>
         <div>Remove?</div>
       </DriverHeader>
-      {data.drivers.map(({ _id, name, age, country, team }) => (
+      {data.drivers.map(({ _id, name, age, country, team, championships }) => (
         <Driver
           key={_id}
           id={_id}
@@ -39,6 +41,7 @@ const Drivers = () => {
           age={age}
           country={country}
           team={team}
+          championships={championships}
         />
       ))}
     </DriverTable>

@@ -7,6 +7,7 @@ const driverSchema = new Schema({
   age: Number,
   country: String,
   team: String,
+  championships: Number,
 })
 
 const Driver = model('driver', driverSchema)
