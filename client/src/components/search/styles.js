@@ -7,6 +7,7 @@ export const SearchBar = styled.div`
   margin-bottom: 1rem;
 
   input {
-    width: 400px;
+    transition: width ${props => props.theme.time}
+      ${props => props.theme.effect};
   }
 `
