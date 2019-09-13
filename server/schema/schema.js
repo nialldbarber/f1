@@ -5,6 +5,7 @@ const typeDefs = gql`
     _id: ID
     name: String
     age: Int
+    death: Int
     country: String
     team: String
     poles: Int
@@ -33,6 +34,7 @@ const typeDefs = gql`
     addDriver(
       name: String!
       age: Int!
+      death: Int!
       country: String!
       team: String!
       poles: Int!
