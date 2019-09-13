@@ -13,7 +13,16 @@ const REMOVE_DRIVER = gql`
   }
 `
 
-const Driver = ({ id, name, age, country, team, championships }) => {
+const Driver = ({
+  id,
+  name,
+  age,
+  country,
+  team,
+  poles,
+  wins,
+  championships,
+}) => {
   const [removeDriver, { error }] = useMutation(REMOVE_DRIVER, {
     variables: { id },
     refetchQueries: ['drivers'],
@@ -27,6 +36,8 @@ const Driver = ({ id, name, age, country, team, championships }) => {
       <div>{age}</div>
       <div>{country}</div>
       <div>{team}</div>
+      <div>{poles}</div>
+      <div>{wins}</div>
       <div>{championships}</div>
       <button type="submit" onClick={() => removeDriver(id)}>
         ✅
@@ -43,5 +54,7 @@ Driver.propTypes = {
   age: PropTypes.number,
   country: PropTypes.string,
   team: PropTypes.string,
+  poles: PropTypes.number,
+  wins: PropTypes.number,
   championships: PropTypes.number,
 }

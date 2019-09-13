@@ -15,6 +15,8 @@ const GET_DRIVERS = gql`
       age
       country
       team
+      poles
+      wins
       championships
     }
   }
@@ -46,11 +48,13 @@ const Drivers = () => {
           <div>Age</div>
           <div>Country</div>
           <div>Team</div>
+          <div>Poles</div>
+          <div>Wins</div>
           <div>Championship(s)</div>
           <div>Remove?</div>
         </DriverHeader>
         {filteredDrivers.map(
-          ({ _id, name, age, country, team, championships }) => (
+          ({ _id, name, age, country, team, poles, wins, championships }) => (
             <Driver
               key={_id}
               id={_id}
@@ -58,6 +62,8 @@ const Drivers = () => {
               age={age}
               country={country}
               team={team}
+              poles={poles}
+              wins={wins}
               championships={championships}
             />
           )

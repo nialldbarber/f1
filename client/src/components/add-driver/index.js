@@ -1,11 +1,13 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
-import axios from 'axios'
 import DatePicker from 'react-datepicker'
 import Select from 'react-select'
 import 'react-datepicker/dist/react-datepicker.css'
 import moment from 'moment'
+// Hooks
+import { FetchCountries } from '../../hooks/fetch-countries'
+import { FetchTeams } from '../../hooks/fetch-teams'
 // Components
 import Button from '../button'
 // Styles
@@ -17,6 +19,8 @@ const ADD_DRIVERS = gql`
     $age: Int!
     $country: String!
     $team: String!
+    $poles: Int!
+    $wins: Int!
     $championships: Int!
   ) {
     addDriver(
@@ -24,12 +28,16 @@ const ADD_DRIVERS = gql`
       age: $age
       country: $country
       team: $team
+      poles: $poles
+      wins: $wins
       championships: $championships
     ) {
       name
       age
       country
       team
+      poles
+      wins
       championships
     }
   }
@@ -41,32 +49,36 @@ const AddDriver = () => {
     name: '',
     country: '',
     team: '',
+    poles: '',
+    wins: '',
     championships: '',
   })
   const [born, setBorn] = useState('')
   const [visibility, setVisibility] = useState(false)
   // Fetch countries
-  const [data, setData] = useState([])
   const [selectedOption, setSelectedOption] = useState('')
+  // Fetch teams
+  const [selectedTeam, setSelectedTeam] = useState('')
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(
-        'https://gist.githubusercontent.com/nialldbarber/df3fa4619ef34c4c8ea382fd464f2309/raw/14e26cf7e1a59b938317fb4aa376432ebe121870/countries.json'
-      )
-      setData(result.data)
-    }
-    fetchData()
-  }, [])
+  const [{ data }] = FetchCountries(
+    'https://gist.githubusercontent.com/nialldbarber/df3fa4619ef34c4c8ea382fd464f2309/raw/14e26cf7e1a59b938317fb4aa376432ebe121870/countries.json',
+    { countries: [] }
+  )
+  const [{ teams }] = FetchTeams(
+    'https://gist.githubusercontent.com/nialldbarber/f0cdd6d671b1a9a7aa7af2c99bb80afe/raw/675f94afc3eb0370731b75c4e8411ce17a268841/f1.json',
+    { teams: [] }
+  )
 
-  const { name, team, championships } = driver
+  const { name, championships, poles, wins } = driver
 
   const [addDriver, { error }] = useMutation(ADD_DRIVERS, {
     variables: {
       name,
       age: born,
       country: selectedOption.label,
-      team,
+      team: selectedTeam.label,
+      poles: parseInt(poles),
+      wins: parseInt(wins),
       championships: parseInt(championships),
     },
     refetchQueries: ['drivers'],
@@ -78,16 +90,14 @@ const AddDriver = () => {
     setDriver({ ...driver, [e.target.name]: e.target.value })
   }
 
-  const handleCountryChange = place => {
-    setSelectedOption(place)
-  }
-
   const handleSubmit = e => {
     e.preventDefault()
     addDriver()
     setDriver({
       name: '',
       team: '',
+      poles: '',
+      wins: '',
       championships: '',
     })
     setVisibility(false)
@@ -126,17 +136,36 @@ const AddDriver = () => {
             <Select
               className="select"
               value={selectedOption}
-              onChange={handleCountryChange}
+              onChange={place => setSelectedOption(place)}
               options={data}
             />
           </label>
           <label htmlFor="team">
             Team:
+            <Select
+              className="select"
+              value={selectedTeam}
+              onChange={t => setSelectedTeam(t)}
+              options={teams}
+            />
+          </label>
+          <label htmlFor="championships">
+            Poles:
             <input
               type="text"
-              name="team"
-              id="team"
-              value={team}
+              name="poles"
+              id="poles"
+              value={poles}
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="championships">
+            Wins:
+            <input
+              type="text"
+              name="wins"
+              id="wins"
+              value={wins}
               onChange={handleChange}
             />
           </label>
