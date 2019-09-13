@@ -15,6 +15,7 @@ Playing about with GraphQL to create a Formula One database - which is presented
 * [ ] Add flags 
 * [ ] Add search bar for driver based on last name 
 * [ ] Add a driver team timeout showing different teams 
+* [ ] Success message after adding driver
 #### Backend
 * [ ] Add championships to schema
 

@@ -90,6 +90,7 @@ const AddDriver = () => {
       team: '',
       championships: '',
     })
+    setVisibility(false)
   }
 
   const handleDateChange = date => {
