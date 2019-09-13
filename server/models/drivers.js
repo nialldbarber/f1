@@ -7,6 +7,8 @@ const driverSchema = new Schema({
   age: Number,
   country: String,
   team: String,
+  poles: Number,
+  wins: Number,
   championships: Number,
 })
 

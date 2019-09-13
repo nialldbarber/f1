@@ -7,6 +7,8 @@ const typeDefs = gql`
     age: Int
     country: String
     team: String
+    poles: Int
+    wins: Int
     championships: Int
     #racesWon: [Race]
   }
@@ -33,6 +35,8 @@ const typeDefs = gql`
       age: Int!
       country: String!
       team: String!
+      poles: Int!
+      wins: Int!
       championships: Int!
     ): Driver
     removeDriver(_id: ID!): Driver
@@ -51,5 +55,4 @@ const typeDefs = gql`
 module.exports = typeDefs
 
 // TODO:
-// Add championships to schema
 // Add races won
