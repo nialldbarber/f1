@@ -18,6 +18,8 @@ Playing about with GraphQL to create a Formula One database - which is presented
 * [ ] Success message after adding driver
 #### Backend
 * [ ] Add championships to schema
+* [ ] Add wins to schema
+* [ ] Add poles to schema
 
 ### Architectural Changes
 #### Frontend
