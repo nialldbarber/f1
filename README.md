@@ -13,7 +13,7 @@ Playing about with GraphQL to create a Formula One database - which is presented
 * [x] Add country dropdown for driver country
 * [ ] Loading states
 * [ ] Add flags 
-* [ ] Add search bar for driver based on last name 
+* [x] Add search bar for driver based on last name 
 * [ ] Add a driver team timeout showing different teams 
 * [ ] Success message after adding driver
 #### Backend
