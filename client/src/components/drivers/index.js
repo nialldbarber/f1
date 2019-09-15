@@ -40,12 +40,16 @@ const Drivers = () => {
     setInput(e.target.value)
   }
 
+  const handleClear = () => {
+    setInput('')
+  }
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error ☹️</p>
 
   return (
     <Fragment>
-      <Search change={handleChange} />
+      <Search change={handleChange} clear={handleClear} value={input} />
       <DriverTable className="drivers">
         <DriverHeader>
           <div>Name</div>

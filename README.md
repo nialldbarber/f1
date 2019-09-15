@@ -6,6 +6,10 @@ Playing about with GraphQL to create a Formula One database - which is presented
 
 ---
 
+![Site](static/site.png?raw=true "Site")
+
+---
+
 ## Todos  
 ### Small Bits
 #### Frontend 
