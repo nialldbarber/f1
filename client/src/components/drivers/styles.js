@@ -9,7 +9,7 @@ export const DriverTable = styled.div`
   background-color: ${props => props.theme.white};
   box-shadow: 0 6px 12px -2px rgba(50, 50, 93, 0.25),
     0 3px 7px -3px rgba(0, 0, 0, 0.3);
-  padding: 4rem;
+  padding: 2rem 4rem 3rem;
 `
 
 export const DriverHeader = styled.div`
