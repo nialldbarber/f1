@@ -45,6 +45,12 @@ const ADD_DRIVERS = gql`
 
 const AddDriver = () => {
   const [startDate, setStartDate] = useState(new Date())
+  const [birthDate, setBirthDate] = useState(null)
+  const [dead, setDead] = useState(false)
+
+  const [deathDate, setDeathDate] = useState(new Date())
+  const [getDeathDate, setGetDeathDate] = useState(null)
+
   const [driver, setDriver] = useState({
     name: '',
     country: '',
@@ -74,7 +80,7 @@ const AddDriver = () => {
   const [addDriver, { error }] = useMutation(ADD_DRIVERS, {
     variables: {
       name,
-      age: born,
+      age: parseInt(born),
       country: selectedOption.label,
       team: selectedTeam.label,
       poles: parseInt(poles),
@@ -90,8 +96,18 @@ const AddDriver = () => {
     setDriver({ ...driver, [e.target.name]: e.target.value })
   }
 
+  const formatDates = () => {
+    if (dead) {
+      setBorn(getDeathDate.diff(birthDate, 'years'))
+    } else {
+      setBorn(moment().diff(birthDate, 'years'))
+    }
+    console.log(born)
+  }
+
   const handleSubmit = e => {
     e.preventDefault()
+
     addDriver()
     setDriver({
       name: '',
@@ -101,14 +117,22 @@ const AddDriver = () => {
       championships: '',
     })
     setVisibility(false)
+    setDead(false)
+  }
+
+  const handleDeathDate = death => {
+    setDeathDate(death)
+    const dd = moment(death)
+    setGetDeathDate(dd)
+    setDead(true)
+    formatDates()
   }
 
   const handleDateChange = date => {
     setStartDate(date)
-    const birthDate = moment(date)
-    const now = moment()
-    const ageee = now.diff(birthDate, 'years')
-    setBorn(ageee)
+    const bd = moment(date)
+    setBirthDate(bd)
+    formatDates()
   }
 
   return (
@@ -128,8 +152,20 @@ const AddDriver = () => {
             />
           </label>
           <label htmlFor="age">
-            Age:
-            <DatePicker selected={startDate} onChange={handleDateChange} />
+            Born:
+            <DatePicker
+              selected={startDate}
+              onChange={handleDateChange}
+              onClick={handleDateChange}
+            />
+          </label>
+          <label htmlFor="death">
+            Death:
+            <DatePicker
+              selected={deathDate}
+              onChange={handleDeathDate}
+              onClick={handleDeathDate}
+            />
           </label>
           <label htmlFor="country">
             Country:

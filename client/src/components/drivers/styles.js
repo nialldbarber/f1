@@ -13,11 +13,12 @@ export const DriverTable = styled.div`
 `
 
 export const DriverHeader = styled.div`
-  position: relative;
+  position: sticky;
+  top: 0;
+  background: ${props => props.theme.white};
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 220px 100px 180px 170px 100px 100px 150px 1fr;
-
   height: 100%;
 
   * {

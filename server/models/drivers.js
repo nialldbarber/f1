@@ -5,7 +5,6 @@ const { Schema, model } = mongoose
 const driverSchema = new Schema({
   name: String,
   age: Number,
-  death: Number,
   country: String,
   team: String,
   poles: Number,

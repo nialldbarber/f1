@@ -16,13 +16,12 @@ const resolvers = {
   Mutation: {
     addDriver: async (
       _,
-      { _id, name, age, death, country, team, poles, wins, championships }
+      { _id, name, age, country, team, poles, wins, championships }
     ) => {
       const driver = new Driver({
         _id,
         name,
         age,
-        death,
         country,
         team,
         poles,
