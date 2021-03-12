@@ -51,7 +51,7 @@
 		"react-apollo": "^3.0.1",
 		"react-app-polyfill": "^1.0.2",
 		"react-datepicker": "^2.9.6",
-		"react-dev-utils": "^9.0.3",
+		"react-dev-utils": "^11.0.4",
 		"react-dom": "^16.9.0",
 		"react-select": "^3.0.4",
 		"resolve": "1.12.0",
